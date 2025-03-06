@@ -1,0 +1,73 @@
+Un problema è ben posto se:
+esiste la soluzione
+la soluzione è unica
+la soluzione dipende con continuità dai dati
+
+Esempio di mal posto: x è in Q, x^2-2=0, trovare x. Ha due soluzioni, non è ben posto. Anzi no, non ha soluzione, perché non è in Q
+
+Continuità dei dati invece? Più difficile da capire
+Se c'è un piccolo errore (vuoi per copiatura, vuoi per errore in virgola mobile, vuoi per degrado del mezzo di memoria, vuoi per distrazione, vuoi per errore di calcolo),
+la soluzione non deve cambiare troppo a causa di un piccolo errore
+Un problema instabile o mal condizionato ha un numero di condizionamento grande
+C'è il nCon assoluto (K) e il nCon relativo (k)
+K: |δx| <= K|δd|, dove δd è l'errore che commetto quando uso dati affetti da errore, δx è l'errore sul risultato (mi pare)
+Il nCon è molto importante. Metti che δd=10e-4, ma K=10e6, li moltiplichi, δx=10e2, sbagli molto con un piccolo errore
+k: più indicativo, il nCon default diciamo, |δx|/|x| <= k|δd|/|d|, è essenzialmente in percentuale ed è leggermente più indicativo, tiene conto dell'ordine di grandezza delle misurazioni
+Se misuro un tavolo e sbaglio di 50cm è un problema, distanza Terra-Sole, 50cm non è niente
+
+Diciamo che conosciamo l'errore massimo:
+|δa|/|a|=|δb|/|b|<=τ, diciamo che τ tende a 0
+
+Esempio prodotto di due numeri reali
+a: a+δa=a'
+b: b+δb=b'
+Dove ' sarebbe un macron da lei
+x' = x+δx = a'*b' = (a+δa)*(b+δb) = ab + bδa + aδb + δaδb
+Diciamo che δaδb è un infinitesimo di grado più piccolo degli altri e quindi lo trascuriamo, altrimenti c'è un erore troppo grande e c'è un problema di fondo e τ non tende a 0
+x=ab, δx = bδa + aδb
+Quindi
+|δx|/|x| = |bδa+aδb|/|ab|
+Per forza:
+|bδa+aδb|/|ab| <= |bδa|/|ab| + |aδb|/|ab|
+Semplifichiamo:
+|bδa+aδb|/|ab| <= |δa|/|a| + |δb|/|b|
+Ma sappiamo che sono <=τ entrambi, quindi
+|bδa+aδb|/|ab| <= τ+τ = 2τ
+Ricollegando l'inizio e la fine:
+|δx|/|x| <= 2τ
+Quindi nel peggior caso possibile, l'ordine di grandezza non cambia, l'errore raddoppia e basta al massimo, con due variabili moltiplicative
+
+Facciamo lo stesso processo con l'addizione
+a: a+δa=a'
+b: b+δb=b'
+x = a+b
+x' = a+δa+b+δb
+δx = δa+δb
+Essenzialmente Se ti fai il calcolo questa volta τ dipende da a e b
+|dx|/|x| = |da+db|/|a+b| <= |da|/|a+b|+|db|/|a+b| = |da||a|/|a+b||a|+|db||b|/|a+b||b|, mettiamo in evidenza |da|/|a| e |db|/|b|, che sono τ
+τ|a|/|a+b| + τ|b|/|a+b| = τ(|a|+|b|/|a+b|) = τ(|δd|/|d|)
+Questo è l'errore di cancellazione. Se a=-b, l'errore va a infinito, ma il computer non ti dà errore
+
+ALGORITMI
+
+Sommatoria
+input: n numeri: a1, a2, a3, ..., an
+output: somma di n numeri: S = Σ[i=1; n] ai
+inizio algoritmo
+S = 0
+for i=1:n
+    S = S+ai
+
+simile quello per la produttoria
+
+Uno più complicato, c'è anche sul libro
+approssimare il numero di nepero e fermando le iterazioni quando il termine generico della somma è minore di 10e-8
+e = Σ[k=0;inf]1/k!
+Con un algoritmo non posso arrivare all'infinito
+Qui non ci va un ciclo for, non so esattamente il numero di iterazioni, uso while
+Come lo miglioro?
+Anzitutto è meglio non rifare ogni volta il calcolo del fattoriale, visto che va usato più volte in ogni ciclo, lo salvo all'inizio del ciclo
+Ma poi, 1/k, al prossimo ciclo lo divido semplicemente per il nuovo k per avere il nuovo valore
+Anziché fare k moltiplicazioni e poi una divisione per il risultato a ogni ciclo, faccio una divisione per ciclo
+Quindi anziché all'inizio del ciclo, "k++, a=1/(k!)", faccio "k++, a/=k", più efficiente
+Quindi è un problema con soluzione univoca, ma che si può implementare in modi diversi con complessità computazionali diverse
