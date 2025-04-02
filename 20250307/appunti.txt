@@ -1,0 +1,110 @@
+Installare MatLab. Si paga, abbiamo una licenza associata all'account istituzionale universitario
+MatLab per adesso senza pacchetti, nella magistrale invece pacchetti specifici
+Esiste anche la versione online, può essere utile se devi fare qualcosa di veloce
+
+Questo corso: lezioni di live coding, non ci sono slide, il tutor porgramma davanti a noi
+A fine lezione, su elearning, riassunto della lezione
+È consigliato seguire le lezioni passo per passo
+
+Interfaccia di MatLab:
+    A sinistra la cartella - file manager
+    Al centro l'editor - dove si scrive il codice
+    In basso la command window - codice direttamente o richiamare i nostri script
+    A destra il workspace - dove si memorizzano le variabili
+    Sopra la barra degli strumenti - la solita
+
+MatLab è un linguaggio molto simile al C. PR1, ASD ed SO sono molto più complicati
+Rivediamo comunque tutto
+Seppur derivato dal C, è un linguaggio ad oggetti: con classi, oggetti, metodi etc
+Non useremo MatLab a oggetti ma procedurale, come il C
+MatLab ) si può eseguire comandi interpretati o creare gli script e compilarli
+
+Due comandi molto utili dalla command Window
+    help - come man su Linux, piccola guida su tutti i comandi che vedremo, anche durante l'esame
+        per esempio "help diary"
+    diary - boh non ho sentito
+
+Esistono due tipi di script che possiamo creare
+    script classico - file.m, simile a main.c, un unico file
+    livescript o roba del genere - .mlx, codice diviso in celle (codice o testo), comandi + formattazione
+
+MatLab non è fortemente tipato, lo capisce l'interprete
+Per creare una variabile, facciamo per esempio "x = 7", e va nel workspace
+Se chiudo il programma le variabili scompaiono, ma magari è un progetto lungo
+Comando "save": salviamo il workspace
+    save(workspace_lab1)
+
+Polimorfismo, si vede in PR2 e lo vediamo anche qui
+La stessa funzione può avere diverse firme, comportamento diverso a seconda di quanti input
+    (Overloading delle funzioni in c++)
+
+Diciamo che adesso facciamo "y=1; z=x+y;". Ma x cos'è? L'abbiamo definito un quarto d'ora fa, ricorda
+Per evitare questa cosa, possiamo pulire il workspace
+    Possiamo cancellare la singola variabile: "clear x"
+    Cancelliamo l'intero workspace: "clear"
+        Non c'è ctrl+Z, quindi se non hai salvato il workspace perdi tutto
+Magari metti "clear" all'inizio di un file ogni volta
+
+Per caricare un workspace, load nome
+
+Il comando whos ti stampa il workspace
+Name, Size, Bytes, Class, Attributes
+Classe e non tipo, le variabili sono oggetti, le classi string e double non hanno attributi
+Mat in MatLab non è matematica ma matrice, infatti Size è una taglia di matrice
+    Una variabile è una matrice 1x1, che è la Size delle variabili che abbiamo creato finora
+Per vedere i dettagli di una singola variabile, "whos x"
+Per ML, ogni numero è un double
+    Possiamo fare cast ma ci conviene lasciarglieli fare impliciti
+
+clc cleara la command window
+Il ; non è obbligatorio, ma se non lo metti ti stampa il risultato
+Stampare il risultato è molto dispendioso, rallenta molto il codice
+Se l'output è una matrice diventa incomprensibile
+
+for i = 0:100 - con i da 0 a 100
+addi + zione
+sottra - zione
+moltiplica * zione
+divi / sione
+% commento
+%{
+    com
+    men
+    to
+%}
+mod(u, lo)
+
+if x ~= y
+    %codice codice codice
+elseif x == y
+    % docdocdcidsio
+else
+    %docice docice docice
+end
+
+"end" termina le sezioni di codice, come } in C e il tab in Python
+
+1/0 = Inf; 1/Inf = 0; Inf/Inf = NaN; 0/0 = NaN
+
+STAMPARE
+disp("il valore di x è)
+disp(x)
+fprintf("Il valore di x è %d", x)
+vanno a capo da soli, ma ci sono comunque \n, \t e i soliti
+%.2f il solito
+
+Ci sono i numeri complessi, quindi c'è "i"
+C'è anche "j" che significa la stessa cosa così puoi usare i come indice
+C'è pi per π
+Si possono sovrascrivere, per esemmpio "pi = 3" (infatti puoi usare i come indice)
+
+c'è
+switch x
+    case 1
+        x
+    case 4
+        y
+...
+non serve break
+
+x += 1 non si può fare
